@@ -1,0 +1,25 @@
+{
+  "files": {
+    "main.css": "/drop-rate/static/css/main.5f361e03.chunk.css",
+    "main.js": "/drop-rate/static/js/main.e3e31492.chunk.js",
+    "main.js.map": "/drop-rate/static/js/main.e3e31492.chunk.js.map",
+    "runtime-main.js": "/drop-rate/static/js/runtime-main.599bbdb6.js",
+    "runtime-main.js.map": "/drop-rate/static/js/runtime-main.599bbdb6.js.map",
+    "static/css/2.5a2f7233.chunk.css": "/drop-rate/static/css/2.5a2f7233.chunk.css",
+    "static/js/2.938ff1cb.chunk.js": "/drop-rate/static/js/2.938ff1cb.chunk.js",
+    "static/js/2.938ff1cb.chunk.js.map": "/drop-rate/static/js/2.938ff1cb.chunk.js.map",
+    "index.html": "/drop-rate/index.html",
+    "precache-manifest.e5dbc72d3c06b037c11a64dc4c2db624.js": "/drop-rate/precache-manifest.e5dbc72d3c06b037c11a64dc4c2db624.js",
+    "service-worker.js": "/drop-rate/service-worker.js",
+    "static/css/2.5a2f7233.chunk.css.map": "/drop-rate/static/css/2.5a2f7233.chunk.css.map",
+    "static/css/main.5f361e03.chunk.css.map": "/drop-rate/static/css/main.5f361e03.chunk.css.map",
+    "static/js/2.938ff1cb.chunk.js.LICENSE.txt": "/drop-rate/static/js/2.938ff1cb.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.599bbdb6.js",
+    "static/css/2.5a2f7233.chunk.css",
+    "static/js/2.938ff1cb.chunk.js",
+    "static/css/main.5f361e03.chunk.css",
+    "static/js/main.e3e31492.chunk.js"
+  ]
+}
