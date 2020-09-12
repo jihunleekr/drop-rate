@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "c584c2289922d87c86d3bdfd55d08221",
+    "revision": "2cf851e6eea38cac2f8406ed5d94f5e7",
     "url": "/drop-rate/index.html"
   },
   {
@@ -8,7 +8,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/drop-rate/static/css/2.5a2f7233.chunk.css"
   },
   {
-    "revision": "e85fb40891d3e9a1aa92",
+    "revision": "dcefb92cfd9996ed392d",
     "url": "/drop-rate/static/css/main.5f361e03.chunk.css"
   },
   {
@@ -20,8 +20,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/drop-rate/static/js/2.d3f41acc.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "e85fb40891d3e9a1aa92",
-    "url": "/drop-rate/static/js/main.30d9702f.chunk.js"
+    "revision": "dcefb92cfd9996ed392d",
+    "url": "/drop-rate/static/js/main.34aad8f7.chunk.js"
   },
   {
     "revision": "1dd5ebcf40ae98513896",
