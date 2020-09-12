@@ -27,7 +27,7 @@ const useStyles = makeStyles((theme: Theme) =>
       display: "flex"
     },
     input: {
-      width: "6rem",
+      width: "5rem",
       background: "rgba(0,0,0,0.09)",
       borderTopLeftRadius: "4px",
       borderBottomLeftRadius: "4px",
@@ -55,10 +55,10 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     actions: {
       display: "flex",
-      margin: "1rem"
+      margin: "1rem",
+      justifyContent: "space-between"
     },
     action: {
-      flex: 1,
       "&:last-child": {
         textAlign: "right"
       }

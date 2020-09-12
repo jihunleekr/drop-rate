@@ -12,7 +12,8 @@ const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
       margin: "0 auto",
-      maxWidth: 600
+      maxWidth: 600,
+      padding: "1rem"
     },
     list: {
       marginBottom: "2rem"

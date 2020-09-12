@@ -23,7 +23,15 @@ const useStyles = makeStyles((theme: Theme) =>
       display: "flex",
       justifyContent: "space-between"
     },
-    textField: {}
+    name: {
+      flex: 1,
+      maxWidth: "15rem"
+    },
+    dropRate: {
+      flex: 1,
+      maxWidth: "7rem",
+      marginLeft: "1rem"
+    }
   })
 );
 
@@ -60,14 +68,14 @@ const NewItem: React.FC<Props> = ({ onAddItem }) => {
     <Paper className={classes.paper}>
       <form noValidate autoComplete="off" className={classes.form}>
         <TextField
-          className={classes.textField}
+          className={classes.name}
           label="아이템명"
           onChange={handleItemChange}
           value={name}
           variant="standard"
         />
         <TextField
-          className={classes.textField}
+          className={classes.dropRate}
           label="드랍율"
           onChange={handlePercentChange}
           value={percent}
