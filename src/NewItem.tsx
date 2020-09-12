@@ -6,6 +6,7 @@ import Paper from "@material-ui/core/Paper";
 import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
 import TextField from "@material-ui/core/TextField";
 
+import { ItemInterface } from "./Item";
 import RateChart from "./RateChart";
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -27,7 +28,7 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 interface Props {
-  onAddItem: (item: { name: string; percent: string }) => void;
+  onAddItem: (item: ItemInterface) => void;
 }
 
 const NewItem: React.FC<Props> = ({ onAddItem }) => {
@@ -49,7 +50,9 @@ const NewItem: React.FC<Props> = ({ onAddItem }) => {
   const handleAddClick = () => {
     onAddItem({
       name: name,
-      percent: percent
+      dropRate: parseInt(percent) / 100,
+      trials: 0,
+      trialsPerClick: "1"
     });
   };
 
@@ -74,7 +77,7 @@ const NewItem: React.FC<Props> = ({ onAddItem }) => {
           }}
         />
       </form>
-      <RateChart rate={parseFloat(percent) / 100} />
+      <RateChart rate={parseFloat(percent) / 100} trials={0} />
       <Button variant="contained" color="primary" onClick={handleAddClick}>
         수집 목록에 추가
       </Button>

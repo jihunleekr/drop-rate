@@ -5,7 +5,7 @@ import React, { useState } from "react";
 
 import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
 
-import Item from "./Item";
+import Item, { ItemInterface } from "./Item";
 import NewItem from "./NewItem";
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -14,31 +14,30 @@ const useStyles = makeStyles((theme: Theme) =>
       margin: "0 auto",
       maxWidth: 600
     },
-    paper: {
-      marginBottom: "1rem",
-      padding: "1rem"
-    },
-    textField: {
-      marginRight: "1rem"
-    },
-    heading: {
-      fontSize: theme.typography.pxToRem(15),
-      flexBasis: "33.33%",
-      flexShrink: 0
-    },
-    secondaryHeading: {
-      fontSize: theme.typography.pxToRem(15),
-      color: theme.palette.text.secondary
+    list: {
+      marginBottom: "2rem"
     }
   })
 );
 
 function App() {
   const classes = useStyles();
-  const [items, setItems] = useState<{ name: string; percent: string }[]>([]);
+  const [items, setItems] = useState<ItemInterface[]>([]);
 
   const addItem = (item: any) => {
-    setItems(prevItems => [{ name: item.name, percent: item.percent }, ...prevItems]);
+    setItems(prevItems => [{ name: item.name, dropRate: item.dropRate, trials: 0, trialsPerClick: "1" }, ...prevItems]);
+  };
+
+  const updateItem = (index: number) => (item: ItemInterface) => {
+    const stagedItems = [...items];
+    stagedItems[index] = item;
+    setItems(stagedItems);
+  };
+
+  const deleteItem = (index: number) => () => {
+    const stagedItems = [...items];
+    stagedItems.splice(index, 1);
+    setItems(stagedItems);
   };
 
   return (
@@ -47,10 +46,16 @@ function App() {
 
       <NewItem onAddItem={addItem} />
 
-      <h2>수집 목록</h2>
-      {items.map((item, index) => {
-        return <Item item={item} key={index} />;
-      })}
+      {items.length > 0 && (
+        <>
+          <h2>수집 목록</h2>
+          <div className={classes.list}>
+            {items.map((item, index) => {
+              return <Item item={item} key={index} onUpdate={updateItem(index)} onDelete={deleteItem(index)} />;
+            })}
+          </div>
+        </>
+      )}
     </div>
   );
 }
