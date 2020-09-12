@@ -25,13 +25,13 @@ function App() {
   const classes = useStyles();
   const [items, setItems] = useState<ItemInterface[]>([]);
 
-  const addItem = (item: any) => {
-    setItems(prevItems => [{ name: item.name, dropRate: item.dropRate, trials: 0, trialsPerClick: "1" }, ...prevItems]);
+  const addItem = (item: ItemInterface) => {
+    setItems(prevItems => [item, ...prevItems]);
   };
 
   const updateItem = (index: number) => (item: ItemInterface) => {
     const stagedItems = [...items];
-    stagedItems[index] = item;
+    stagedItems[index] = { ...item };
     setItems(stagedItems);
   };
 
@@ -50,7 +50,6 @@ function App() {
 
   useEffect(() => {
     const stringifiedItems = JSON.stringify(items);
-    console.log("items", stringifiedItems);
     localStorage.setItem("items", stringifiedItems);
   }, [items]);
 

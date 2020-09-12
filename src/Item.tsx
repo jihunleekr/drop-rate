@@ -62,7 +62,8 @@ const useStyles = makeStyles((theme: Theme) =>
       "&:last-child": {
         textAlign: "right"
       }
-    }
+    },
+    details: {}
   })
 );
 
@@ -71,6 +72,8 @@ export interface ItemInterface {
   dropRate: number;
   trials: number;
   trialsPerClick: string;
+  createdAt: Date;
+  updatedAt?: Date;
 }
 
 interface Props {
@@ -88,7 +91,7 @@ const Item: React.FC<Props> = ({ item, onUpdate, onDelete }) => {
   };
 
   const handleTrialClick = (event: React.MouseEvent) => {
-    onUpdate({ ...item, trials: item.trials + parseInt(item.trialsPerClick) });
+    onUpdate({ ...item, trials: item.trials + parseInt(item.trialsPerClick), updatedAt: new Date() });
   };
 
   const handleTrialsPerClickChange = (event: React.ChangeEvent<HTMLInputElement>) => {

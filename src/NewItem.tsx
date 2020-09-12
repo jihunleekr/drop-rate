@@ -60,7 +60,8 @@ const NewItem: React.FC<Props> = ({ onAddItem }) => {
       name: name,
       dropRate: parseInt(percent) / 100,
       trials: 0,
-      trialsPerClick: "1"
+      trialsPerClick: "1",
+      createdAt: new Date()
     });
   };
 
