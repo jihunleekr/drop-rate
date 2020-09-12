@@ -1,7 +1,7 @@
 import "./App.css";
 import "../node_modules/react-vis/dist/style.css";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
 
@@ -39,6 +39,19 @@ function App() {
     stagedItems.splice(index, 1);
     setItems(stagedItems);
   };
+
+  useEffect(() => {
+    const stringifiedItems = localStorage.getItem("items");
+    if (stringifiedItems !== null) {
+      setItems(JSON.parse(stringifiedItems));
+    }
+  }, []);
+
+  useEffect(() => {
+    const stringifiedItems = JSON.stringify(items);
+    console.log("items", stringifiedItems);
+    localStorage.setItem("items", stringifiedItems);
+  }, [items]);
 
   return (
     <div className={classes.root}>
