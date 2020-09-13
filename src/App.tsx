@@ -3,7 +3,13 @@ import "../node_modules/react-vis/dist/style.css";
 
 import React, { useEffect, useState } from "react";
 
-import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
+import { Button } from "@material-ui/core";
+import CssBaseline from "@material-ui/core/CssBaseline";
+import {
+    createMuiTheme, createStyles, makeStyles, Theme, ThemeProvider
+} from "@material-ui/core/styles";
+import useMediaQuery from "@material-ui/core/useMediaQuery";
+import BrightnessMediumIcon from "@material-ui/icons/BrightnessMedium";
 
 import Item, { ItemInterface } from "./Item";
 import NewItem from "./NewItem";
@@ -15,6 +21,14 @@ const useStyles = makeStyles((theme: Theme) =>
       maxWidth: 600,
       padding: "1rem"
     },
+    header: {
+      display: "flex",
+      justifyContent: "space-between",
+      fontWeight: "bold",
+      alignItems: "center"
+    },
+    logo: {},
+    actions: {},
     list: {
       marginBottom: "2rem"
     }
@@ -24,6 +38,17 @@ const useStyles = makeStyles((theme: Theme) =>
 function App() {
   const classes = useStyles();
   const [items, setItems] = useState<ItemInterface[]>([]);
+  const prefersDarkMode = useMediaQuery("(prefers-color-scheme: dark)");
+  const [themeMode, setThemeMode] = useState<"dark" | "light">(prefersDarkMode ? "dark" : "light");
+  const theme = React.useMemo(
+    () =>
+      createMuiTheme({
+        palette: {
+          type: themeMode
+        }
+      }),
+    [themeMode]
+  );
 
   const addItem = (item: ItemInterface) => {
     setItems(prevItems => [item, ...prevItems]);
@@ -41,10 +66,22 @@ function App() {
     setItems(stagedItems);
   };
 
+  const toggleThemeMode = () => {
+    setThemeMode(prevThemeMode => {
+      if (prevThemeMode === "light") return "dark";
+      else return "light";
+    });
+  };
+
   useEffect(() => {
     const stringifiedItems = localStorage.getItem("items");
     if (stringifiedItems !== null) {
       setItems(JSON.parse(stringifiedItems));
+    }
+
+    const localStorageThemeMode = localStorage.getItem("theme-mode");
+    if (localStorageThemeMode === "dark" || localStorageThemeMode === "light") {
+      setThemeMode(localStorageThemeMode);
     }
   }, []);
 
@@ -53,23 +90,37 @@ function App() {
     localStorage.setItem("items", stringifiedItems);
   }, [items]);
 
+  useEffect(() => {
+    localStorage.setItem("theme-mode", themeMode);
+  }, [themeMode]);
+
   return (
-    <div className={classes.root}>
-      <h1>DROPRATE</h1>
-
-      <NewItem onAddItem={addItem} />
-
-      {items.length > 0 && (
-        <>
-          <h2>수집 목록</h2>
-          <div className={classes.list}>
-            {items.map((item, index) => {
-              return <Item item={item} key={index} onUpdate={updateItem(index)} onDelete={deleteItem(index)} />;
-            })}
+    <ThemeProvider theme={theme}>
+      <CssBaseline />
+      <div className={classes.root}>
+        <div className={classes.header}>
+          <h1 className={classes.logo}>DROPRATE</h1>
+          <div className={classes.actions}>
+            <Button onClick={toggleThemeMode}>
+              <BrightnessMediumIcon />
+            </Button>
           </div>
-        </>
-      )}
-    </div>
+        </div>
+
+        <NewItem onAddItem={addItem} />
+
+        {items.length > 0 && (
+          <>
+            <h2>수집 목록</h2>
+            <div className={classes.list}>
+              {items.map((item, index) => {
+                return <Item item={item} key={index} onUpdate={updateItem(index)} onDelete={deleteItem(index)} />;
+              })}
+            </div>
+          </>
+        )}
+      </div>
+    </ThemeProvider>
   );
 }
 
