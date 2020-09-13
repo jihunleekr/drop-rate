@@ -27,7 +27,16 @@ const useStyles = makeStyles((theme: Theme) =>
       fontWeight: "bold",
       alignItems: "center"
     },
-    logo: {},
+    logo: {
+      fontFamily: "'Jost', sans-serif",
+      display: "flex",
+      alignItems: "center",
+      "& img": {
+        width: "1.5em",
+        height: "1.5em",
+        marginRight: "0.3em"
+      }
+    },
     actions: {},
     list: {
       marginBottom: "2rem"
@@ -99,7 +108,10 @@ function App() {
       <CssBaseline />
       <div className={classes.root}>
         <div className={classes.header}>
-          <h1 className={classes.logo}>DROPRATE</h1>
+          <h1 className={classes.logo}>
+            <img src="/logo192.png" />
+            DROPRATE
+          </h1>
           <div className={classes.actions}>
             <Button onClick={toggleThemeMode}>
               <BrightnessMediumIcon />
