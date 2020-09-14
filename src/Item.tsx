@@ -43,6 +43,7 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     secondaryHeading: {
       flex: 1,
+      textAlign: "right",
       fontSize: theme.typography.pxToRem(15),
       color: theme.palette.text.hint,
       "& b": {
@@ -107,11 +108,12 @@ const Item: React.FC<Props> = ({ item, onUpdate, onDelete }) => {
       <AccordionSummary expandIcon={<ExpandMoreIcon />} className={classes.summary}>
         <Typography className={classes.heading}>{item.name}</Typography>
         <div className={classes.secondaryHeading}>
-          {item.trials + 1}회차 확률: <b>{formatPercent(calculateRate(item.dropRate, item.trials + 1))}</b>
+          <b>{(item.trials + 1).toLocaleString(undefined, { minimumFractionDigits: 0 })}</b> 회차 확률:{" "}
+          <b>{formatPercent(calculateRate(item.dropRate, item.trials + 1), 2)}</b>
         </div>
       </AccordionSummary>
       <div className={classes.chart}>
-        <RateChart rate={item.dropRate} trials={item.trials} />
+        <RateChart rate={item.dropRate} trials={item.trials + 1} />
       </div>
       <div className={classes.actions}>
         <div className={classes.action}>

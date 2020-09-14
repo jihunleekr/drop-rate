@@ -86,7 +86,7 @@ const NewItem: React.FC<Props> = ({ onAddItem }) => {
           }}
         />
       </form>
-      <RateChart rate={parseFloat(percent) / 100} trials={0} />
+      <RateChart rate={parseFloat(percent) / 100} trials={1} />
       <Button variant="contained" color="primary" onClick={handleAddClick}>
         수집 목록에 추가
       </Button>

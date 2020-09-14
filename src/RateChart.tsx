@@ -4,7 +4,7 @@ import {
     YAxis
 } from "react-vis";
 
-import { calculateTrials } from "./Helper";
+import { calculateRate, calculateTrials, formatPercent, formatTrials } from "./Helper";
 
 interface RateChartProps {
   rate: number;
@@ -19,34 +19,28 @@ const RateChart: React.FC<RateChartProps> = ({ rate, trials }) => {
   useEffect(() => {
     if (rate) {
       const data = [];
-      const failure = 1 - rate;
       const maxTrials = calculateTrials(rate, 0.99);
       const targetTrials = calculateTrials(rate, 0.9);
-      var stackedFailureRate = 1.0;
-      for (let i = 0; i < maxTrials; i++) {
-        stackedFailureRate = stackedFailureRate * failure;
-        const p = { x: i, y: (1 - stackedFailureRate) * 100 };
-        data.push(p);
 
-        if (i === targetTrials) {
-          setTargetData([p]);
-        }
+      const step = Math.floor(maxTrials / 20);
 
-        if (i === trials) {
-          setCurrentData([p]);
-        }
+      for (let i = 1; i < maxTrials; i += step) {
+        data.push({ x: i, y: calculateRate(rate, i) });
       }
+
+      setCurrentData([{ x: trials, y: calculateRate(rate, trials) }]);
+      setTargetData([{ x: targetTrials, y: calculateRate(rate, targetTrials) }]);
       setRateData(data);
     }
   }, [rate, trials]);
 
   return (
     <div>
-      <FlexibleWidthXYPlot height={300} yDomain={[0, 100]}>
+      <FlexibleWidthXYPlot height={300} yDomain={[0, 1]}>
         <VerticalGridLines />
         <HorizontalGridLines />
-        <XAxis tickFormat={v => `${v}회`} title="시도횟수" />
-        <YAxis tickFormat={v => `${v}%`} title="누적확률" />
+        <XAxis tickFormat={v => formatTrials(v)} title="시도횟수" />
+        <YAxis tickFormat={v => formatPercent(v)} title="누적확률" />
         <LineSeries data={rateData} opacity={0.5} />
         <MarkSeries data={targetData} />
         <MarkSeries data={currentData} />
