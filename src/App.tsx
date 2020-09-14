@@ -109,7 +109,7 @@ function App() {
       <div className={classes.root}>
         <div className={classes.header}>
           <h1 className={classes.logo}>
-            <img src="/logo192.png" />
+            <img src="/logo192.png" alt="logo" />
             DROPRATE
           </h1>
           <div className={classes.actions}>
